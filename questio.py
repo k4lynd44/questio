@@ -1,28 +1,10 @@
-#!/usr/bin/env python3
+from openpyxl import load_workbook
+wb = load_workbook(filename = 'proviamo.xlsx',data_only=True)
 
+#Il test viene effettuato SOLO sullo sheet Human Resource per il momento
+sh = wb["HR"]
+l=len(sh.rows)
 
-
-import os
-import datetime
-from openpyxl import Workbook
-
-
-cwd = os.getcwd()
-
-wb = Workbook()
-
-# grab the active worksheet
-ws = wb.active
-
-# Data can be assigned directly to cells
-ws['A1'] = 42
-
-# Rows can also be appended
-ws.append([1, 2, 3])
-
-# Python types will automatically be converted
-
-ws['A2'] = datetime.datetime.now()
-
-# Save the file
-wb.save("sample.xlsx")
+for i in range(2,l):
+	cell_obj=sh.cell(row=i,column=1)
+	print(cell_obj.value)
